@@ -4,11 +4,11 @@
     text-align: center;
     cursor: pointer;
     outline: none;
-    color: #fff;
-    background-color: #4CAF50;
+    color: #ffffff;
+    background-color: #3415e48a;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 9px #978989;
 }
 
 .boton:hover{
@@ -16,6 +16,6 @@
 }
 
 .boton:disable{
-    background-color: beige;
+    background-color: rgb(170, 165, 173);
     cursor:not-allowed
 }
