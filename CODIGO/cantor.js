@@ -16,9 +16,16 @@ function Cantor() {
 
     }
     this.sacarBalota = function () {
+        let totalsacadas = this.balotasSacadas.filter(valor => valor==true).length;
+        if (totalsacadas < 75) {
         let balota = Math.floor(Math.random() * 75) + 1;
+        while (this.balotasSacadas[balota - 1]) {
+            balota = Math.floor(Math.random() * 75) + 1;
+        }
         this.balotasSacadas[balota - 1] = true;
         this.ultimabalota = balota;
-
+    } else {
+        this.ultimabalota = "Juego terminado";
+    }
     }
 }
