@@ -22,8 +22,14 @@
         Última Balota: <span class="numerobalota">
             {{cantor.ultimabalota || "Ninguno"}}
         </span>
+        Balotas restantes: <span class="numerobalota">
+            {{cantor.balotasFaltantes.length || "75"}}
+        </span>
+
 
     </div>
+    <div class="panelprincipal">
+        
     <div class="cantor">
         <table class="tablaCantor">
             <thead>
@@ -37,12 +43,36 @@
             </thead>
             <tbody>
                 <tr ng-repeat="fila in cantor.tabla">
-                    <td ng-repeat="numero in fila" ng-class="{sacada:cantor.balotasSacadas[numero-1]}">
+                    <td ng-repeat="numero in fila" ng-class="{sacada: cantor.balotasSacadas[numero - 1] }">
                         {{numero}}
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="tablas">
+        <div class="jugador" ng-repeat="jugador in jugadores">
+            <h2>{{jugador.nombre}}</h2>
+            </h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                    <th>B</th>
+                    <th>I</th>
+                    <th>N</th>
+                    <TH>G</TH>
+                    <TH>O</TH>
+                </tr>
+                </thead>
+                            <tbody>
+                <tr ng-repeat="fila in jugador.tablajugador.tabla">
+                    <td ng-repeat="numero in fila" ng-class="{sacada:false}">
+                        {{numero}}
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
     </div>
 </body>
 

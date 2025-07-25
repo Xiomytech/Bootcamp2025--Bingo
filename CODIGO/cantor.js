@@ -24,8 +24,10 @@ function Cantor() {
         }
         this.balotasSacadas[balota - 1] = true;
         this.ultimabalota = balota;
+        this.balotasFaltantes = this.balotasSacadas.map((sacada, index) => !sacada ? index + 1 : null).filter(valor => valor !== null);
     } else {
         this.ultimabalota = "Juego terminado";
+        this.balotasFaltantes = "Quedan () balotas";
     }
-    }
+}
 }
