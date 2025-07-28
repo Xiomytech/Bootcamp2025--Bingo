@@ -2,76 +2,78 @@
 
 <head>
     <title>Juego Bingo</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" type="text/css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="CODIGO/app.js"></script>
     <script src="CODIGO/cantor.js"></script>
     <script src="CODIGO/tabla.js"></script>
-
-
 </head>
 
 <body ng-controller="ControladorJuegoBingo">
-    <button class="boton" ng-click="IniciarJuego()">
+    <button class="boton" ng-click="iniciarJuego()" ng-disabled="juegoIniciado">
         Iniciar Juego
     </button>
-    <button class="boton" ng-click="sacarBalota()">
+    <button class="boton" ng-click="sacarBalota()" ng-disabled="!juegoIniciado">
         Sacar Balota
     </button>
-    <div class="ultimabalota">
-        Última Balota: <span class="numerobalota">
-            {{cantor.ultimabalota || "Ninguno"}}
-        </span>
-        Balotas restantes: <span class="numerobalota">
-            {{cantor.balotasFaltantes.length || "75"}}
-        </span>
 
-
+    <div class="ultimaBalota">
+        Última balota <span class="numeroBalota">
+            {{ cantor.ultimaBalota || "Ninguna" }}
+        </span>
+        Pendientes <span class="numeroBalota">
+            {{ cantor.pendientes || "Ninguna" }}
+        </span>
+        <span ng-if="posicionGanador!=-1">
+            El ganador es {{ jugadores[posicionGanador].nombre }}
+        </span>
     </div>
-    <div class="panelprincipal">
-        
-    <div class="cantor">
-        <table class="tablaCantor">
-            <thead>
-                <tr>
-                    <th>B</th>
-                    <th>I</th>
-                    <th>N</th>
-                    <TH>G</TH>
-                    <TH>O</TH>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="fila in cantor.tabla">
-                    <td ng-repeat="numero in fila" ng-class="{sacada: cantor.balotasSacadas[numero - 1] }">
-                        {{numero}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="tablas">
-        <div class="jugador" ng-repeat="jugador in jugadores">
-            <h2>{{jugador.nombre}}</h2>
-            </h2>
-            <table class="tabla">
+    <div class="panelPrincipal">
+        <div class="cantor">
+            <table class="tablaCantor">
                 <thead>
                     <tr>
-                    <th>B</th>
-                    <th>I</th>
-                    <th>N</th>
-                    <TH>G</TH>
-                    <TH>O</TH>
-                </tr>
+                        <th>B</th>
+                        <th>I</th>
+                        <th>N</th>
+                        <th>G</th>
+                        <th>O</th>
+                    </tr>
                 </thead>
-                            <tbody>
-                <tr ng-repeat="fila in jugador.tablajugador.tabla">
-                    <td ng-repeat="numero in fila" ng-class="{sacada:false}">
-                        {{numero}}
-                    </td>
-                </tr>
-            </tbody>
+                <tbody>
+                    <tr ng-repeat="fila in cantor.tabla">
+                        <td ng-repeat="numero in fila" ng-class="{ sacada: cantor.balotasSacadas[numero-1] }">
+                            {{ numero }}
+                        </td>
+                    </tr>
+                </tbody>
             </table>
+        </div>
+        <div class="tablas">
+            <div class="jugador" ng-repeat="jugador in jugadores">
+                <h3>{{ jugador.nombre }}
+                    <span ng-if="jugador.ganador">¡BINGO!</span>
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>B</th>
+                            <th>I</th>
+                            <th>N</th>
+                            <th>G</th>
+                            <th>O</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="fila in jugador.tablaJugador.tabla track by $index">
+                            <td ng-repeat="numero in fila track by $index"
+                                ng-class="{ tapada: jugador.tablaJugador.tapadas[$parent.$index][$index] }">
+                                {{ numero }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

@@ -156,12 +156,19 @@
     flex-wrap: wrap;
     /* Permite que las columnas se envuelvan en pantallas pequeñas */
 }
-.jugador td.sacada {
+.jugador td.tapada {
     background-color: #b53ce9;
-    color: #eee;
+    color: #f2eff5;
 }
 
 .jugador td:not(.sacada) {
     background-color: #e6ddeb;
     color: #000;
+}
+.jugador th, .jugador td {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
